@@ -1,27 +1,10 @@
-# kcd-cheat
-KCD Cheat Mod: https://www.nexusmods.com/kingdomcomedeliverance/mods/106
+# JoewAlabel-kcd-cheat
+My version of @pryans KCD Cheat Mod: https://www.nexusmods.com/kingdomcomedeliverance/mods/106
 
 
-## Create new release
+## Fixes
+I created the repository just to fix the errors and make them work in the newest update v1.9.6+<br/>
+I don't know much about KDC modding so any help is welcome ;)
 
-1. Edit ./Source/Scripts/Startup/main.lua and set major + minor version number
-
-    cheat.versionMajor = 1
-    cheat.versionMinor = 31
-
-2. Run build
-
-   ./build.sh
-
-3. Update mod_page.txt with new content from help.txt, commands.txt
-
-4. Commit all changes
-
-5. Run release:
-
-   ./release.sh
-
-6. Upload new release zip files
-
-   ./Release/Cheat-X.XX.zip
-   ./Release/Cheat-NOKEYS-X.XX.zip
+#### Commads Fixed
+- [x] **cheat_own_all_stolen_items** - Now it works and the game don't crash anymore ;)
