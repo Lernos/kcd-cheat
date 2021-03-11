@@ -67,15 +67,11 @@ end
 -- ============================================================================
 -- cheat_teleport_to
 -- ============================================================================
-cheat.cheat_teleport_to_args = {
-  place=function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "Place to teleport to") end,
-}
-cheat:createCommand("cheat_teleport_to", "cheat:teleport_to(%line)", cheat.cheat_teleport_to_args,
-  "Teleports the player to the given place. Supported places (case insensitive):\n$8(Inn at the) Glade, Ledetchko, Merhojed,\n$8Monastery, Neuhof, Pribyslavitz,\n$8Rattay, Rovna, Samopesh,\n$8Sasau, Skalitz, Talmberg, \n$8Uzhitz, Vranik ",
-  "Example", "cheat_teleport_to place:rattay")
+System.AddCCommand('cheat_teleport_to', 'cheat:teleport_to(%line)', "Teleports the player to the given place. Supported places (case insensitive):\n$8(Inn at the) Glade, Ledetchko, Merhojed,\n$8Monastery, Neuhof, Pribyslavitz,\n$8Rattay, Rovna, Samopesh,\n$8Sasau, Skalitz, Talmberg, \n$8Uzhitz, Vranik")
 function cheat:teleport_to(line)
-  local args = cheat:argsProcess(line, cheat.cheat_teleport_to_args)
-  local nplace, nplaceErr = cheat:argsGet(args, 'place')
+  local args = string.gsub(tostring(line), "place:", "")
+  --local argsArr = cheat:split(args, " ") -- ok
+  local checkteste = "error"
 
   local places = {}
   places["GLADE"] = "x:2849 y:1913 z:156"
@@ -92,13 +88,20 @@ function cheat:teleport_to(line)
   places["TALMBERG"] = "x:2360 y:2846 z:105"
   places["UZHITZ"] = "x:3041 y:3324 z:156"
   places["VRANIK"] = "x:930 y:913 z:130"
-
-  if not nplaceErr then
-    if places[cheat:toUpper(nplace)] ~= nil then
-      cheat:teleport(places[cheat:toUpper(nplace)])
-    else
-      cheat:logError("Invalid Place - See list of supported places type: 'cheat_teleport_to ?'")
-    end
+  
+  if places[cheat:toUpper(args)] ~= nil then
+    cheat:teleport(places[cheat:toUpper(args)])
+  else
+	for k,v in pairs(places) do
+	   if string.find(k, cheat:toUpper(args)) then
+	     checkteste = v
+	   end
+	end
+	if checkteste ~= "error" then
+	  cheat:teleport(checkteste)
+	else
+	  cheat:logError("Invalid Place - See list of supported places type: 'cheat_teleport_to ?'")
+	end
   end
 end
 
