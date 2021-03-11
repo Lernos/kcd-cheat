@@ -217,9 +217,6 @@ function cheat:split(s, delimiter)
     end
     return result;
 end
-
-function cheat:GetParmbyName(s, parm)
-end
 -- ============================================================================
 -- end
 -- ============================================================================
