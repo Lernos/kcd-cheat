@@ -15,6 +15,7 @@ cheat_find_buffs
 cheat_find_horses
 cheat_find_items
 cheat_find_npc
+cheat_tp_to_npc
 cheat_find_perks
 cheat_find_skills
 cheat_get_time
