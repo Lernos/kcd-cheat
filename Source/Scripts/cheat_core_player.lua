@@ -106,6 +106,32 @@ function cheat:teleport_to(line)
 end
 
 -- ============================================================================
+-- cheat_tp_to_npc
+-- ============================================================================
+cheat.cheat_tp_to_npc_args = {
+  token=function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "All or part of a the NPC's name.") end
+}
+cheat:createCommand("cheat_tp_to_npc", "cheat:cheat_tp_to_npc(%line)", cheat.cheat_tp_to_npc_args,
+  "Finds an NPC or list of NPCs and teleports to the last of them.\n$8This only works if the NPC has been loaded into the world.",
+  "Teleport to Father Godwin", "cheat_tp_to_npc token:godwin")
+function cheat:cheat_tp_to_npc(line)
+  local args = cheat:argsProcess(line, cheat.cheat_find_npc_args)
+  local token, tokenErr = cheat:argsGet(args, 'token', nil)
+  if not tokenErr then
+    cheat:cheat_find_npc(line)
+    local npcs = cheat:find_npc(token)
+    if npcs and #npcs > 0 then
+      local nx = npcs[#npcs]:GetWorldPos().x
+      local ny = npcs[#npcs]:GetWorldPos().y
+      local nz = npcs[#npcs]:GetWorldPos().z
+	  cheat:teleport("x:" .. nx .. " y:" .. ny .. " z:" .. nz)
+    else
+      cheat:logError("NPC [%s] not found.", token)
+    end
+  end
+end
+
+-- ============================================================================
 -- cheat_set_state
 -- ============================================================================
 cheat.cheat_set_state_args = {
