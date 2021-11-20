@@ -1,6 +1,7 @@
 cheat_add_all_items
 cheat_add_all_perks
 cheat_add_buff
+cheat_add_potion_buff
 cheat_add_buff_heal
 cheat_add_buff_immortal
 cheat_add_buff_invisible
