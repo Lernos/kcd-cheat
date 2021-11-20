@@ -99,6 +99,38 @@ function cheat:cheat_add_buff(line)
 end
 
 -- ============================================================================
+-- cheat_add_potion_buff
+-- ============================================================================
+System.AddCCommand('cheat_add_potion_buff', 'cheat:add_potion_buff(%line)', "Usage: cheat_add_potion_buff id:number\n$8Adds a potion buff to the player. Supported buffs:\n$8 1. Nighthawk\n$8 2. Aqua Vitalis\n$8 3. Buck's Blood\n$8 4. Marigold potion\n$8 5. Lazarus potion\n$8 6. Hair o' the Dog potion")
+function cheat:add_potion_buff(line)
+  local args = string.gsub(tostring(line), "id:", "")
+  local checkteste = "error"
+  
+  local ids = {}
+  ids["1"] = "id:fa2ad41e-5701-4fe7-8630-5cee49eb304f"
+  ids["2"] = "id:27c2fd6a-9b87-4d1f-b434-44f5ec3fa426"
+  ids["3"] = "id:122c0e62-747e-4bb3-9650-1a14d0420b08"
+  ids["4"] = "id:8503216a-a34c-49f0-aefa-54d4502046f9"
+  ids["5"] = "id:7690a860-a843-4609-8a67-9868b87b32b5"
+  ids["6"] = "id:3f915710-1ccf-41a0-bc7f-67c8cc1a8e7b"
+  
+  if ids[args] ~= nil then
+    cheat:cheat_add_buff(ids[args])
+  else
+	for k,v in pairs(ids) do
+	   if string.find(k, args) then
+	     checkteste = v
+	   end
+	end
+	if checkteste ~= "error" then
+	  cheat:cheat_add_buff(checkteste)
+	else
+	  cheat:logError("Invalid Buff - See list of supported potion buffs: 'cheat_add_potion_buff ?'")
+	end
+  end
+end
+
+-- ============================================================================
 -- cheat_remove_buff
 -- ============================================================================
 cheat.cheat_remove_buff_args = {
