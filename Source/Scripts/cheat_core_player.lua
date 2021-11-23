@@ -308,6 +308,19 @@ function cheat:cheat_wash_dirt_and_blood()
   cheat:logInfo("All Clean!")
 end
 
+-- ============================================================================
+-- cheat_charm
+-- ============================================================================
+cheat:createCommand("cheat_charm", "cheat:charm()", nil,
+  "Automates your morning routine of bath-haircut-sex for maximum Charisma bonus.\n$8Washes all dirt and blood and applies Fresh Cut and Smitten buffs.",
+  "Wash yourself and add Charisma buffs", "cheat_charm")
+function cheat:cheat_charm()
+  cheat:cheat_wash_dirt_and_blood()
+  cheat:cheat_add_buff("id:fresh_cut")
+  cheat:cheat_add_buff("id:alpha_male_in_love")
+  cheat:logInfo("All Clean and dandy!")
+end
+
 -- cheat_unlock_recipes
 -- ============================================================================
 cheat:createCommand("cheat_unlock_recipes", "cheat:cheat_unlock_recipes()", nil,
