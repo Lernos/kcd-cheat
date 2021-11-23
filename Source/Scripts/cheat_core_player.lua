@@ -109,24 +109,33 @@ end
 -- cheat_tp_to_npc
 -- ============================================================================
 cheat.cheat_tp_to_npc_args = {
-  token=function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "All or part of a the NPC's name.") end
+  id=function(args,name,showHelp) return cheat:argsGetRequired(args, name, showHelp, "All or part of the NPC's name.") end,
+  num=function(args,name,showHelp) return cheat:argsGetOptionalNumber(args, name, 0, showHelp, "Optional: The NPC's number in the list if there's more than one.\n$8Keep it greater than 0.") end
 }
 cheat:createCommand("cheat_tp_to_npc", "cheat:cheat_tp_to_npc(%line)", cheat.cheat_tp_to_npc_args,
-  "Finds an NPC or list of NPCs and teleports to the last of them.\n$8This only works if the NPC has been loaded into the world.",
-  "Teleport to Father Godwin", "cheat_tp_to_npc token:godwin")
+  "Finds an NPC or list of NPCs and teleports to any of them.\n$8This only works if the NPC has been loaded into the world.\n$8Defaults to last NPC in the list if no num argument received.",
+  "Teleport to Father Godwin", "cheat_tp_to_npc id:godwin")
 function cheat:cheat_tp_to_npc(line)
-  local args = cheat:argsProcess(line, cheat.cheat_find_npc_args)
-  local token, tokenErr = cheat:argsGet(args, 'token', nil)
-  if not tokenErr then
-    cheat:cheat_find_npc(line)
-    local npcs = cheat:find_npc(token)
+  local args = cheat:argsProcess(line, cheat.cheat_tp_to_npc_args)
+  local id, idErr = cheat:argsGet(args, 'id', nil)
+  local num, numErr = cheat:argsGet(args, 'num', 0)
+  if not idErr and not numErr then
+    cheat:cheat_find_npc("token:" .. id)
+    local npcs = cheat:find_npc(id)
+    if num == nil or num <= 0 then
+      num = #npcs
+    end
+    if num > #npcs then
+      cheat:logError("Sorry, this number is greater than the amount of found NPCS.")
+	  return
+    end
     if npcs and #npcs > 0 then
-      local nx = npcs[#npcs]:GetWorldPos().x
-      local ny = npcs[#npcs]:GetWorldPos().y
-      local nz = npcs[#npcs]:GetWorldPos().z
+      local nx = npcs[num]:GetWorldPos().x
+      local ny = npcs[num]:GetWorldPos().y
+      local nz = npcs[num]:GetWorldPos().z
 	  cheat:teleport("x:" .. nx .. " y:" .. ny .. " z:" .. nz)
     else
-      cheat:logError("NPC [%s] not found.", token)
+      cheat:logError("NPC [%s] not found.", id)
     end
   end
 end
