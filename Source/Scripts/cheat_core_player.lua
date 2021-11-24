@@ -311,7 +311,7 @@ end
 -- ============================================================================
 -- cheat_charm
 -- ============================================================================
-cheat:createCommand("cheat_charm", "cheat:charm()", nil,
+cheat:createCommand("cheat_charm", "cheat:cheat_charm()", nil,
   "Automates your morning routine of bath-haircut-sex for maximum Charisma bonus.\n$8Washes all dirt and blood and applies Fresh Cut and Smitten buffs.",
   "Wash yourself and add Charisma buffs", "cheat_charm")
 function cheat:cheat_charm()
