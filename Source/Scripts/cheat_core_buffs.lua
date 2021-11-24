@@ -229,11 +229,10 @@ end
 -- cheat_add_buff_invisible
 -- ============================================================================
 cheat:createCommand("cheat_add_buff_invisible", "cheat:cheat_add_buff_invisible()", nil,
-  "Adds invisible buff to player. For now this just sets conspicuousness to zero.\n$8Use cheat_remove_buff_invisible to remove this.",
+  "Adds invisible buff to player. Should set visibility, conspicuousness and noise to zero.\n$8Use cheat_remove_buff_invisible to remove this.",
   "Add invisible buff to player", "cheat_add_buff_invisible")
 function cheat:cheat_add_buff_invisible()
-  cheat:cheat_add_buff("id:cf787871-d151-43b7-a7c9-39acac116f0f") -- vib=-10,con=-10
-  cheat:cheat_add_buff("id:07db9dfd-0e0c-4cbe-bf8a-10aaa1add262") -- ors=-1
+  cheat:cheat_add_buff("id:cf787871-d151-43b7-a7c9-39acac116f0f") -- tweaked using patched table files
   cheat:logInfo("Invisibility buff added.")
   return true
 end
@@ -246,7 +245,6 @@ cheat:createCommand("cheat_remove_buff_invisible", "cheat:cheat_remove_buff_invi
   "Remove invisible buff from player", "cheat_remove_buff_invisible")
 function cheat:cheat_remove_buff_invisible()
   cheat:cheat_remove_buff("id:cf787871-d151-43b7-a7c9-39acac116f0f")
-  cheat:cheat_remove_buff("id:07db9dfd-0e0c-4cbe-bf8a-10aaa1add262")
   cheat:logInfo("Invisibility buff removed.")
   return true
 end
